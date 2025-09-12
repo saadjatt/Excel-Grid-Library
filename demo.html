@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Grid Library Demo - SaadCoder</title>
+    <link rel="stylesheet" href="excel-grid.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f6f8fa;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #7cb518 0%, #6ba015 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://saadcoder.com/assets/img/logo.png') no-repeat center left 20px;
+            background-size: 40px 40px;
+            opacity: 0.15;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .brand-info {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .brand-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brand-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+        }
+        
+        .demo-section h2 {
+            color: #24292f;
+            border-bottom: 2px solid #d0d7de;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-section h3 {
+            color: #656d76;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .grid-container {
+            margin: 20px 0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .instructions {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .instructions h4 {
+            margin: 0 0 10px 0;
+            color: #24292f;
+        }
+        
+        .instructions ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        .code-example {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .button-group {
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #7cb518 0%, #6ba015 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #6ba015 0%, #5a8f12 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: #656d76;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4c555e;
+        }
+        
+        .status {
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .formula-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .formula-example {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .formula-example h4 {
+            margin: 0 0 10px 0;
+            color: #24292f;
+            font-size: 14px;
+        }
+        
+        .formula-example code {
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 3px;
+            padding: 4px 8px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 13px;
+            display: block;
+            margin: 5px 0;
+        }
+        
+        .footer {
+            background: #f6f8fa;
+            border-top: 1px solid #d0d7de;
+            padding: 20px;
+            text-align: center;
+            color: #656d76;
+        }
+        
+        .footer a {
+            color: #7cb518;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Enhanced grid styling with brand colors */
+        .excel-grid-container .excel-grid {
+            border: 2px solid #7cb518;
+        }
+        
+        .excel-grid-container .excel-grid td {
+            border: 1px solid #e1e5e9;
+        }
+        
+        .excel-grid-container .excel-grid td:hover {
+            background-color: #f0f8e8;
+        }
+        
+        .excel-grid-container .excel-grid td.error {
+            color: #d32f2f;
+            background-color: #ffebee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Excel Grid Library</h1>
+            <p>A lightweight JavaScript library for creating editable spreadsheet-like grids with formula support</p>
+            <div class="brand-info">
+                Created by <a href="https://saadcoder.com" target="_blank">SaadCoder</a> | 
+                <a href="https://saadcoder.com" target="_blank">saadcoder.com</a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="demo-section">
+                <h2>Basic Demo</h2>
+                <p>Click on any cell to edit it. Use formulas starting with <code>=</code> to perform calculations.</p>
+                
+                <div class="instructions">
+                    <h4>How to use:</h4>
+                    <ul>
+                        <li><strong>Click</strong> on any cell to edit it</li>
+                        <li><strong>Double-click</strong> to edit with cursor positioning</li>
+                        <li><strong>Enter</strong> to save and stay in same cell</li>
+                        <li><strong>Tab</strong> to save and move right</li>
+                        <li><strong>Escape</strong> to cancel editing</li>
+                        <li><strong>Arrow keys</strong> to navigate between cells</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-container">
+                    <div id="grid1" class="excel-grid-container"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn" onclick="loadSampleData()">Load Sample Data</button>
+                    <button class="btn btn-secondary" onclick="clearGrid()">Clear Grid</button>
+                    <button class="btn btn-secondary" onclick="showData()">Show Data</button>
+                </div>
+                
+                <div id="status" class="status" style="display: none;"></div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>Formula Examples</h2>
+                <p>Try these formulas in the grid above:</p>
+                
+                <div class="formula-examples">
+                    <div class="formula-example">
+                        <h4>Basic Arithmetic</h4>
+                        <code>=2+2</code>
+                        <code>=10-5</code>
+                        <code>=3*4</code>
+                        <code>=15/3</code>
+                    </div>
+                    
+                    <div class="formula-example">
+                        <h4>Cell References</h4>
+                        <code>=A1+B1</code>
+                        <code>=A1*B1</code>
+                        <code>=(A1+B1)/2</code>
+                    </div>
+                    
+                    <div class="formula-example">
+                        <h4>Complex Formulas</h4>
+                        <code>=(A1+B1)*C1</code>
+                        <code>=A1*(B1-C1)</code>
+                        <code>=(A1+B1)/(C1-D1)</code>
+                        <code>=SUM(A1:C1)</code>
+                    </div>
+                    
+                    <div class="formula-example">
+                        <h4>Error Cases</h4>
+                        <code>=A1/B1</code> (if B1 is 0)
+                        <code>=A1+B1</code> (if A1 or B1 is empty)
+                        <code>=A1</code> (if A1 references itself)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>API Examples</h2>
+                
+                <h3>Initialize Grid</h3>
+                <div class="code-example">
+// Initialize with default options
+$('#grid1').excelGrid();
+
+// Initialize with custom options
+$('#grid1').excelGrid({
+    rows: 15,
+    cols: 10,
+    onChange: function(cellCoord, rawValue, evaluatedValue) {
+        console.log('Cell changed:', cellCoord, rawValue, evaluatedValue);
+    }
+});
+                </div>
+                
+                <h3>Load Data Programmatically</h3>
+                <div class="code-example">
+// Load data from 2D array
+const data = [
+    ['Name', 'Age', 'Salary'],
+    ['John', 30, 50000],
+    ['Jane', 25, 45000],
+    ['Bob', 35, 60000]
+];
+
+$('#grid1').excelGrid({
+    initialData: data
+});
+                </div>
+                
+                <h3>Get and Set Data</h3>
+                <div class="code-example">
+// Get current data
+const gridData = $('#grid1').data('excelGrid').getData();
+console.log('Raw data:', gridData.raw);
+console.log('Evaluated data:', gridData.evaluated);
+
+// Set new data
+const newData = [
+    ['Product', 'Price', 'Quantity', 'Total'],
+    ['Apple', 1.50, 10, '=B2*C2'],
+    ['Banana', 0.80, 15, '=B3*C3']
+];
+$('#grid1').data('excelGrid').setData(newData);
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Editable Grid:</strong> Click to edit cells with inline editing</li>
+                    <li><strong>Formula Support:</strong> Formulas starting with <code>=</code> with standard arithmetic operators</li>
+                    <li><strong>Cell References:</strong> Excel-style references like A1, B2, etc.</li>
+                    <li><strong>Operator Precedence:</strong> Proper handling of parentheses and operator precedence</li>
+                    <li><strong>Dependency Tracking:</strong> Automatic recalculation when referenced cells change</li>
+                    <li><strong>Circular Reference Detection:</strong> Shows #CIRC error for circular references</li>
+                    <li><strong>Keyboard Navigation:</strong> Arrow keys, Enter, Tab, Escape support</li>
+                    <li><strong>Error Handling:</strong> Shows #ERROR for invalid formulas</li>
+                    <li><strong>jQuery Plugin:</strong> Easy integration with existing jQuery projects</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Excel Grid Library - Built with jQuery | <a href="https://github.com/saadjatt/Excel-Grid-Library" style="color: #7cb518;">View on GitHub</a> | <a href="https://saadcoder.com" target="_blank">SaadCoder.com</a></p>
+        </div>
+    </div>
+    
+    <!-- Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="excel-grid.js"></script>
+    
+    <script>
+        // Global variable to store the grid instance
+        let gridInstance = null;
+        
+        // Initialize the demo grid
+        $(document).ready(function() {
+            console.log('Initializing Excel Grid...');
+            
+            try {
+                $('#grid1').excelGrid({
+                    rows: 10,
+                    cols: 8,
+                    onChange: function(cellCoord, rawValue, evaluatedValue) {
+                        showStatus(`Cell ${cellCoord.ref} changed: "${rawValue}" → ${evaluatedValue}`);
+                    }
+                });
+                
+                // Store the grid instance for easy access
+                gridInstance = $('#grid1').data('excelGrid');
+                console.log('Grid initialized successfully:', gridInstance);
+                
+                // Verify the instance is available
+                if (!gridInstance) {
+                    console.error('Grid instance not found after initialization');
+                    showStatus('Error: Grid instance not available');
+                    return;
+                }
+                
+                // Load some initial sample data
+                loadSampleData();
+                
+            } catch (error) {
+                console.error('Error initializing grid:', error);
+                showStatus('Error initializing grid: ' + error.message);
+            }
+        });
+        
+        function loadSampleData() {
+            console.log('Loading sample data...');
+            
+            // Try to get grid instance if not available
+            if (!gridInstance) {
+                gridInstance = $('#grid1').data('excelGrid');
+            }
+            
+            if (!gridInstance) {
+                console.error('Grid instance not available');
+                showStatus('Error: Grid not initialized');
+                return;
+            }
+            
+            try {
+                const sampleData = [
+                    ['Item', 'Price', 'Quantity', 'Total', 'Discount', 'Final'],
+                    ['Apple', 1.50, 10, '=B2*C2', 0.1, '=D2*(1-E2)'],
+                    ['Banana', 0.80, 15, '=B3*C3', 0.05, '=D3*(1-E3)'],
+                    ['Orange', 2.00, 8, '=B4*C4', 0.15, '=D4*(1-E4)'],
+                    ['Grape', 3.50, 5, '=B5*C5', 0.2, '=D5*(1-E5)'],
+                    ['Total', '', '', '=D2+D3+D4+D5', '', '=F2+F3+F4+F5']
+                ];
+                
+                gridInstance.setData(sampleData);
+                showStatus('Sample data loaded successfully!');
+                console.log('Sample data loaded');
+                
+            } catch (error) {
+                console.error('Error loading sample data:', error);
+                showStatus('Error loading sample data: ' + error.message);
+            }
+        }
+        
+        function clearGrid() {
+            console.log('Clearing grid...');
+            
+            // Try to get grid instance if not available
+            if (!gridInstance) {
+                gridInstance = $('#grid1').data('excelGrid');
+            }
+            
+            if (!gridInstance) {
+                console.error('Grid instance not available');
+                showStatus('Error: Grid not initialized');
+                return;
+            }
+            
+            try {
+                gridInstance.setData([
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', ''],
+                    ['', '', '', '', '', '', '', '']
+                ]);
+                showStatus('Grid cleared!');
+                console.log('Grid cleared');
+                
+            } catch (error) {
+                console.error('Error clearing grid:', error);
+                showStatus('Error clearing grid: ' + error.message);
+            }
+        }
+        
+        function showData() {
+            console.log('Getting grid data...');
+            
+            // Try to get grid instance if not available
+            if (!gridInstance) {
+                gridInstance = $('#grid1').data('excelGrid');
+            }
+            
+            if (!gridInstance) {
+                console.error('Grid instance not available');
+                showStatus('Error: Grid not initialized');
+                return;
+            }
+            
+            try {
+                const data = gridInstance.getData();
+                console.log('Raw data:', data.raw);
+                console.log('Evaluated data:', data.evaluated);
+                showStatus('Data logged to console. Open Developer Tools to view.');
+                
+            } catch (error) {
+                console.error('Error getting data:', error);
+                showStatus('Error getting data: ' + error.message);
+            }
+        }
+        
+        function showStatus(message) {
+            $('#status').text(message).show();
+            setTimeout(function() {
+                $('#status').fadeOut();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

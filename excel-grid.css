@@ -1,0 +1,140 @@
+/* Excel Grid Library Styles */
+
+.excel-grid {
+    border-collapse: collapse;
+    border: 2px solid #d0d7de;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.excel-grid td {
+    border: 1px solid #d0d7de;
+    padding: 8px 12px;
+    min-width: 80px;
+    min-height: 32px;
+    position: relative;
+    background-color: #ffffff;
+    transition: background-color 0.1s ease;
+}
+
+.excel-grid td:hover {
+    background-color: #f6f8fa;
+}
+
+.excel-grid td.editing {
+    background-color: #fff8c5;
+    border: 2px solid #0969da;
+}
+
+.excel-grid td.error {
+    background-color: #ffeaea;
+    color: #d1242f;
+    font-weight: 500;
+}
+
+.excel-grid .cell-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+}
+
+.excel-grid .cell-input:focus {
+    outline: none;
+}
+
+
+
+.excel-grid tbody {
+    counter-reset: row-number 1;
+}
+
+/* Container styles */
+.excel-grid-container {
+    position: relative;
+    overflow: auto;
+    max-height: 600px;
+    border: 2px solid #d0d7de;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.excel-grid-container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.excel-grid-container::-webkit-scrollbar-track {
+    background: #f6f8fa;
+    border-radius: 6px;
+}
+
+.excel-grid-container::-webkit-scrollbar-thumb {
+    background: #d0d7de;
+    border-radius: 6px;
+}
+
+.excel-grid-container::-webkit-scrollbar-thumb:hover {
+    background: #a8b1ba;
+}
+
+/* Focus styles */
+.excel-grid td:focus-within {
+    outline: 2px solid #0969da;
+    outline-offset: -2px;
+}
+
+/* Selection styles */
+.excel-grid td.selected {
+    background-color: #0969da;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .excel-grid {
+        font-size: 12px;
+    }
+    
+    .excel-grid td {
+        padding: 6px 8px;
+        min-width: 60px;
+        min-height: 28px;
+    }
+    
+    .excel-grid td[data-col-header]:before {
+        font-size: 10px;
+        top: -18px;
+    }
+    
+    .excel-grid tr:before {
+        font-size: 10px;
+        left: -25px;
+        width: 18px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .excel-grid {
+        border: 1px solid #000;
+    }
+    
+    .excel-grid td {
+        border: 1px solid #000;
+        background: white !important;
+    }
+    
+    .excel-grid td[data-col-header]:before,
+    .excel-grid tr:before {
+        display: none;
+    }
+}

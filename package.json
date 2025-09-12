@@ -1,0 +1,53 @@
+{
+  "name": "excel-grid-library",
+  "version": "1.0.0",
+  "description": "A lightweight JavaScript library that transforms HTML tables or 2D arrays into fully functional, Excel-like editable grids with formula support",
+  "main": "excel-grid.js",
+  "scripts": {
+    "demo": "python3 -m http.server 8000",
+    "test": "echo 'Open demo.html in your browser to test the library'"
+  },
+  "keywords": [
+    "excel",
+    "spreadsheet",
+    "grid",
+    "table",
+    "formula",
+    "calculation",
+    "jquery",
+    "javascript",
+    "editable",
+    "data-table",
+    "saadcoder"
+  ],
+  "author": {
+    "name": "SaadCoder",
+    "email": "contact@saadcoder.com",
+    "url": "https://saadcoder.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saadcoder/excel-clone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saadcoder/excel-clone/issues"
+  },
+  "homepage": "https://saadcoder.com",
+  "dependencies": {
+    "jquery": ">=3.6.0"
+  },
+  "devDependencies": {},
+  "files": [
+    "excel-grid.js",
+    "excel-grid.css",
+    "demo.html",
+    "README.md",
+    "USAGE.md"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
