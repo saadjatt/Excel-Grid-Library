@@ -6,6 +6,7 @@
 [![Browser Support](https://img.shields.io/badge/Browser-Chrome%20%7C%20Firefox%20%7C%20Safari%20%7C%20Edge-green.svg)](https://caniuse.com/)
 
 A lightweight, feature-rich JavaScript library that transforms HTML tables or 2D arrays into fully functional, Excel-like editable grids with formula support, dependency tracking, and intuitive keyboard navigation.
+👉 **Live Demo:** [Excel Grid Library Demo](https://saadcoder.com/saadapps/Excel-Grid-Library/demo.html)
 
 **Created by [SaadCoder](https://saadcoder.com) | [![Website](https://img.shields.io/badge/Website-saadcoder.com-brightgreen.svg)](https://saadcoder.com)**
 
